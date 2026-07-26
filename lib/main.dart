@@ -6,6 +6,7 @@ import 'student_dashboard.dart';
 import 'admin_dashboard.dart';
 import 'teacher_dashboard.dart';
 import 'notification_service.dart';
+import 'dart:io';
 
 class ThemeManager {
   static final ValueNotifier<ThemeMode> themeMode = ValueNotifier(ThemeMode.dark);
@@ -17,17 +18,21 @@ class ThemeManager {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyD336wudscclID4IgyYVSXlzOy6vQTyM3g",
+    options: FirebaseOptions(
+      apiKey: "AIzaSyD336wudsccLID4IgyYVSXlzOy6vQTYm3g",
       authDomain: "rand-institute-10055.firebaseapp.com",
       projectId: "rand-institute-10055",
       storageBucket: "rand-institute-10055.firebasestorage.app",
       messagingSenderId: "366249114990",
-      appId: "1:366249114990:web:f787ccce2f8258257fd57f",
+      appId: Platform.isIOS 
+          ? "1:366249114990:ios:2b98c01982c8f5427fd57f" // 🔥 App ID یێ نوو یێ ئایفۆنێ
+          : "1:366249114990:web:f787ccce2f8258257fd57f", // App ID یێ Android/Web
       measurementId: "G-XC0YDH03J1",
     ),
   );
+
   await NotificationService.initializeNotifications();
 
   runApp(const MyApp());
