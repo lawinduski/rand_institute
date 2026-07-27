@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.lawiduski.randinstitute</string>
+	<string>com.lawinduski.randinstitute</string>
 	<key>PROJECT_ID</key>
 	<string>rand-institute-10055</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:366249114990:ios:2b98c01982c8f5427fd57f</string>
+	<string>1:366249114990:ios:85a22fcb6b05f9ab7fd57f</string>
 </dict>
 </plist>
