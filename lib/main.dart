@@ -19,7 +19,7 @@ class ThemeManager {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 🔥 ۱. ئینشەلایزکرنا Firebase
+  // 🔥 پاراستنی Firebase ژ کراشبوونا ئایفۆنێ
   try {
     await Firebase.initializeApp(
       options: FirebaseOptions(
@@ -38,7 +38,7 @@ void main() async {
     debugPrint("Firebase init error: $e");
   }
 
-  // 🔥 ۲. ئینشەلایزکرنا نۆتیفیکەیشنان (ب بێ ئەوەی ئایفۆن بکراشێنێت)
+  // 🔥 پاراستنی Notifications ژ کراشبوونێ
   try {
     await NotificationService.initializeNotifications();
   } catch (e) {
@@ -197,6 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          // 🖼️ لۆگۆیا پەیمانگەھێ
                           Container(
                             width: 90,
                             height: 90,
