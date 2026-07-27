@@ -19,21 +19,31 @@ class ThemeManager {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: "AIzaSyD336wudsccLID4IgyYVSXlzOy6vQTYm3g",
-      authDomain: "rand-institute-10055.firebaseapp.com",
-      projectId: "rand-institute-10055",
-      storageBucket: "rand-institute-10055.firebasestorage.app",
-      messagingSenderId: "366249114990",
-      appId: Platform.isIOS 
-          ? "1:366249114990:ios:2b98c01982c8f5427fd57f" // 🔥 App ID یێ نوو یێ ئایفۆنێ
-          : "1:366249114990:web:f787ccce2f8258257fd57f", // App ID یێ Android/Web
-      measurementId: "G-XC0YDH03J1",
-    ),
-  );
+  // 🔥 ۱. ئینشەلایزکرنا Firebase
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyD336wudsccLID4IgyYVSXlzOy6vQTYm3g",
+        authDomain: "rand-institute-10055.firebaseapp.com",
+        projectId: "rand-institute-10055",
+        storageBucket: "rand-institute-10055.firebasestorage.app",
+        messagingSenderId: "366249114990",
+        appId: Platform.isIOS 
+            ? "1:366249114990:ios:2b98c01982c8f5427fd57f" // App ID یێ ئایفۆنێ
+            : "1:366249114990:web:f787ccce2f8258257fd57f", // App ID یێ Android/Web
+        measurementId: "G-XC0YDH03J1",
+      ),
+    );
+  } catch (e) {
+    debugPrint("Firebase init error: $e");
+  }
 
-  await NotificationService.initializeNotifications();
+  // 🔥 ۲. ئینشەلایزکرنا نۆتیفیکەیشنان (ب بێ ئەوەی ئایفۆن بکراشێنێت)
+  try {
+    await NotificationService.initializeNotifications();
+  } catch (e) {
+    debugPrint("Notification init error: $e");
+  }
 
   runApp(const MyApp());
 }
@@ -171,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF0066FF).withValues(alpha: isDark ? 0.25 : 0.15),
+                color: const Color(0xFF0066FF).withOpacity(isDark ? 0.25 : 0.15),
               ),
             ),
           ),
@@ -187,7 +197,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // 🖼️ لۆگۆیا پەیمانگەھێ ل لێرەیە
                           Container(
                             width: 90,
                             height: 90,
@@ -200,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: const Color(0xFF0066FF).withValues(alpha: 0.4),
+                                  color: const Color(0xFF0066FF).withOpacity(0.4),
                                   blurRadius: 20,
                                   offset: const Offset(0, 8),
                                 ),
@@ -209,10 +218,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(50),
                               child: Image.asset(
-                                'assets/logo.png', // 👈 ڕێڕەوی وێنەکەت
+                                'assets/logo.png',
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
-                                  // ئەگەر وێنەکە نەدۆزرایەوە ئەم ئایکۆنە نیشان دەدات
                                   return const Icon(Icons.school_rounded, size: 50, color: Colors.white);
                                 },
                               ),
@@ -266,7 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: const Color(0xFF0066FF).withValues(alpha: 0.35),
+                                        color: const Color(0xFF0066FF).withOpacity(0.35),
                                         blurRadius: 12,
                                         offset: const Offset(0, 6),
                                       ),
